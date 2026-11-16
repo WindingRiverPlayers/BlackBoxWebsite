@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winding River Players | Bradford County's Oldest Community Theatre</title>
+    <meta name="description" content="Winding River Players — Bradford County's oldest nonprofit community theatre group (est. 1980), performing at the Black Box Theatre in Towanda, PA.">
+    
+    <!-- Google Fonts: Playfair Display for theatrical headings & Plus Jakarta Sans for clean UI -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0D0F14',
+                        obsidian: '#141720',
+                        charcoal: '#1C202B',
+                        stagegold: {
+                            DEFAULT: '#E5A93C',
+                            light: '#F3C66F',
+                            dark: '#B88121'
+                        },
+                        crimson: {
+                            DEFAULT: '#8B1E2F',
+                            light: '#B02A3F',
+                            dark: '#5C111D'
+                        },
+                        offwhite: '#F4F4F6'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Subtle Theatrical Effects (Spotlight Gradients & Glassmorphism) -->
+    <style>
+        body {
+            background-color: #0D0F14;
+            color: #F4F4F6;
+            overflow-x: hidden;
+        }
+
+        /* Theatrical Overhead Spotlight Effect */
+        .spotlight-hero {
+            background: 
+                radial-gradient(ellipse 65% 50% at 50% -10%, rgba(229, 169, 60, 0.22) 0%, rgba(139, 30, 47, 0.12) 45%, rgba(13, 15, 20, 0) 80%),
+                radial-gradient(circle at 85% 30%, rgba(139, 30, 47, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, #0D0F14 0%, #12151E 100%);
+        }
+
+        .spotlight-card {
+            background: linear-gradient(145deg, rgba(28, 32, 43, 0.72) 0%, rgba(20, 23, 32, 0.88) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .spotlight-card:hover {
+            border-color: rgba(229, 169, 60, 0.35);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px -5px rgba(229, 169, 60, 0.12);
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(229, 169, 60, 0.25);
+        }
+
+        /* Subtle Stage Curtain Lines Pattern */
+        .curtain-pattern {
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0.015) 0px,
+                rgba(255, 255, 255, 0.015) 1px,
+                transparent 1px,
+                transparent 48px
+            );
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-stagegold selection:text-midnight">
+
+    <!-- =====================================================================
+         TOAST NOTIFICATION (Non-blocking feedback for copy & form actions)
+         ===================================================================== -->
+    <div id="toast-notification" role="status" aria-live="polite" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="flex items-center gap-3 bg-charcoal border border-stagegold/40 text-offwhite px-5 py-3.5 rounded-xl shadow-2xl">
+            <span class="flex h-2.5 w-2.5 rounded-full bg-stagegold animate-pulse"></span>
+            <p id="toast-message" class="text-sm font-medium">Action completed</p>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         1. STICKY NAVIGATION BAR
+         ===================================================================== -->
+    <header class="sticky top-0 z-40 w-full bg-midnight/85 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand / Logo -->
+                <a href="#" class="flex items-center gap-3.5 group focus:outline-none">
+                    <!-- Custom Theatrical Masks & River Wave SVG Emblem -->
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-crimson to-crimson-dark border border-stagegold/40 flex items-center justify-center shadow-lg group-hover:border-stagegold transition-colors">
+                        <svg class="w-6 h-6 text-stagegold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0" />
+                            <path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0" />
+                            <path d="M7 7c1.5-2 3.5-2 5 0s3.5 2 5 0" />
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-serif text-lg sm:text-xl font-bold tracking-tight text-offwhite block leading-none group-hover:text-stagegold transition-colors">
+                            Winding River Players
+                        </span>
+                        <span class="text-[11px] uppercase tracking-[0.2em] text-stagegold/90 font-medium mt-1 block">
+                            Est. 1980 • Towanda, PA
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-offwhite/80">
+                    <a href="#upcoming" class="hover:text-stagegold transition-colors py-2">Upcoming Shows</a>
+                    <a href="#story" class="hover:text-stagegold transition-colors py-2">Our Story</a>
+                    <a href="#venue" class="hover:text-stagegold transition-colors py-2">The Venue</a>
+                    <a href="#board" class="hover:text-stagegold transition-colors py-2">Board &amp; Get Involved</a>
+                    <a href="#contact" class="hover:text-stagegold transition-colors py-2">Contact</a>
+                </nav>
+
+                <!-- Desktop CTA & Mobile Menu Button -->
+                <div class="flex items-center gap-3">
+                    <a href="#upcoming" class="hidden sm:inline-flex items-center gap-2 bg-stagegold hover:bg-stagegold-light text-midnight font-semibold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-stagegold/15 transition-all transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                        </svg>
+                        Get Tickets / Upcoming
+                    </a>
+
+                    <!-- Mobile Hamburger Button -->
+                    <button id="mobile-menu-btn" type="button" aria-label="Toggle navigation menu" aria-expanded="false" class="lg:hidden p-3 rounded-xl bg-charcoal/80 border border-white/10 text-offwhite hover:text-stagegold focus:outline-none">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-obsidian border-b border-white/10 px-4 pt-3 pb-6 space-y-2">
+            <a href="#upcoming" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-offwhite hover:bg-charcoal hover:text-stagegold transition-colors">Upcoming Shows</a>
+            <a href="#story" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-offwhite hover:bg-charcoal hover:text-stagegold transition-colors">Our Story</a>
+            <a href="#venue" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-offwhite hover:bg-charcoal hover:text-stagegold transition-colors">The Venue</a>
+            <a href="#board" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-offwhite hover:bg-charcoal hover:text-stagegold transition-colors">Board &amp; Get Involved</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-offwhite hover:bg-charcoal hover:text-stagegold transition-colors">Contact</a>
+            <div class="pt-2">
+                <a href="#upcoming" class="mobile-nav-link flex items-center justify-center gap-2 w-full bg-stagegold text-midnight font-bold py-3.5 rounded-xl shadow-md">
+                    Get Tickets / Upcoming Shows
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- =====================================================================
+         2. HERO SECTION
+         ===================================================================== -->
+    <section class="relative spotlight-hero curtain-pattern pt-16 pb-24 sm:pt-24 sm:pb-32 lg:pt-28 lg:pb-36 border-b border-white/10">
+        <!-- Decorative Ambient Stage Rings -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+            <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[680px] h-[340px] rounded-full bg-stagegold/10 blur-3xl"></div>
+            <div class="absolute bottom-0 right-10 w-80 h-80 rounded-full bg-crimson/15 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Marquee Eyebrow Badge -->
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-charcoal/90 border border-stagegold/30 text-stagegold text-xs sm:text-sm font-semibold tracking-wide uppercase mb-8 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-stagegold animate-ping"></span>
+                <span>46th Season • Live Community Theatre in Towanda, PA</span>
+            </div>
+
+            <!-- Main Dramatic Headline -->
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-offwhite max-w-5xl mx-auto leading-[1.12]">
+                Bradford County’s Oldest <span class="text-transparent bg-clip-text bg-gradient-to-r from-stagegold-light via-stagegold to-amber-500 italic">Nonprofit</span> Community Theatre
+            </h1>
+
+            <!-- Subheadline -->
+            <p class="mt-6 sm:mt-8 text-lg sm:text-xl text-offwhite/75 max-w-3xl mx-auto leading-relaxed font-normal">
+                Celebrating over 45 years of live dramatic arts, musicals, and youth productions in the heart of the Endless Mountains along the Susquehanna River.
+            </p>
+
+            <!-- Primary & Secondary CTAs -->
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+                <a href="#upcoming" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-stagegold hover:bg-stagegold-light text-midnight font-bold text-base px-8 py-4 rounded-xl shadow-xl shadow-stagegold/20 transition-all transform hover:-translate-y-0.5">
+                    <span>Explore the Season</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="#story" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-charcoal/80 hover:bg-charcoal text-offwhite border border-white/15 hover:border-stagegold/50 font-semibold text-base px-8 py-4 rounded-xl transition-all">
+                    <span>About Our Theatre</span>
+                </a>
+            </div>
+
+            <!-- Quick Credibility Bar -->
+            <div class="mt-16 pt-10 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="font-serif text-2xl sm:text-3xl font-bold text-stagegold">1980</div>
+                    <div class="text-xs sm:text-sm text-offwhite/60 mt-1">Founded in Bradford County</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-2xl sm:text-3xl font-bold text-offwhite">46 Years</div>
+                    <div class="text-xs sm:text-sm text-offwhite/60 mt-1">Of Live Local Theatre</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-2xl sm:text-3xl font-bold text-stagegold">415 Main St</div>
+                    <div class="text-xs sm:text-sm text-offwhite/60 mt-1">The Black Box Theatre</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-serif text-2xl sm:text-3xl font-bold text-offwhite">501(c)(3)</div>
+                    <div class="text-xs sm:text-sm text-offwhite/60 mt-1">Volunteer-Run Nonprofit</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         3. UPCOMING EVENTS & 2026 SEASON SHOWCASE
+         ===================================================================== -->
+    <section id="upcoming" class="py-20 sm:py-28 bg-midnight relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="text-stagegold font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] block mb-2">On Stage Next</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-offwhite">
+                        Upcoming Events &amp; Season
+                    </h2>
+                </div>
+                <p class="text-offwhite/70 max-w-md text-sm sm:text-base">
+                    Join us in downtown Towanda for festive community variety, youth musicals, and intimate cabaret evenings.
+                </p>
+            </div>
+
+            <!-- FEATURED UPCOMING EVENT CARD: Holiday Variety Show -->
+            <div class="spotlight-card rounded-3xl overflow-hidden border border-stagegold/30 shadow-2xl mb-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
+                    <!-- Left Theatrical Poster / Visual Banner -->
+                    <div class="lg:col-span-5 relative bg-gradient-to-br from-crimson-dark via-crimson to-midnight p-8 sm:p-10 flex flex-col justify-between min-h-[320px] border-b lg:border-b-0 lg:border-r border-white/10">
+                        <!-- Decorative Stage Lights SVG -->
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center gap-1.5 bg-midnight/60 backdrop-blur-sm border border-stagegold/40 text-stagegold text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full">
+                                ★ Featured Holiday Event
+                            </span>
+                            <span class="text-xs font-semibold uppercase tracking-widest text-offwhite/80 bg-white/10 px-3 py-1 rounded-lg">
+                                Free Admission
+                            </span>
+                        </div>
+
+                        <div class="my-8">
+                            <p class="text-stagegold-light font-medium text-sm uppercase tracking-widest mb-2">Winding River Players Presents</p>
+                            <h3 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-offwhite leading-tight">
+                                Holiday Variety Show
+                            </h3>
+                            <p class="mt-3 text-offwhite/85 text-sm sm:text-base">
+                                Music, festive sketches, seasonal storytelling, and hometown cheer immediately following Towanda’s Hometown Christmas Tree Lighting!
+                            </p>
+                        </div>
+
+                        <!-- Date & Time Strip -->
+                        <div class="bg-midnight/70 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+                            <div class="bg-stagegold text-midnight rounded-xl px-3.5 py-2 text-center shrink-0">
+                                <span class="block text-xs font-extrabold uppercase">DEC</span>
+                                <span class="block font-serif text-2xl font-black leading-none">04</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-offwhite text-sm sm:text-base">Friday, December 4, 2026 • 7:00 PM</div>
+                                <div class="text-xs text-stagegold-light mt-0.5">Doors open at 6:30 PM • Limited intimate seating</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Event Details & Interactive Controls -->
+                    <div class="lg:col-span-7 p-8 sm:p-10 lg:p-12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-offwhite/75 mb-6">
+                                <span class="inline-flex items-center gap-1.5 bg-charcoal px-3.5 py-1.5 rounded-lg border border-white/10">
+                                    <svg class="w-4 h-4 text-stagegold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Black Box Theatre (415 Main St, Towanda)
+                                </span>
+                                <span class="inline-flex items-center gap-1.5 bg-charcoal px-3.5 py-1.5 rounded-lg border border-white/10">
+                                    <svg class="w-4 h-4 text-stagegold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                                    Concessions &amp; Holiday Raffle Tickets
+                                </span>
+                            </div>
+
+                            <h4 class="font-serif text-2xl font-bold text-offwhite mb-3">
+                                Warm Up After the Tree Lighting on Main Street
+                            </h4>
+                            <p class="text-offwhite/75 leading-relaxed mb-6">
+                                Step inside from the winter chill right after downtown Towanda’s Hometown Christmas festivities! Enjoy an evening of local vocalists, comedic holiday vignettes, and family-friendly entertainment performed by Bradford County talent. Admission is completely free—donations, concessions, and raffle proceeds directly support our 2027 community season.
+                            </p>
+
+                            <!-- Interactive Audition / Perform Info Toggle Drawer -->
+                            <div class="mb-8">
+                                <button id="perform-toggle-btn" type="button" aria-expanded="false" class="w-full flex items-center justify-between px-5 py-3.5 rounded-xl bg-charcoal/90 hover:bg-charcoal border border-white/10 hover:border-stagegold/40 text-left transition-colors">
+                                    <span class="flex items-center gap-2.5 font-semibold text-sm sm:text-base text-stagegold-light">
+                                        <svg class="w-5 h-5 text-stagegold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                                        Want to Perform or Audition for the Holiday Variety Show?
+                                    </span>
+                                    <svg id="perform-chevron" class="w-5 h-5 text-offwhite/60 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                
+                                <div id="perform-drawer" class="hidden mt-2 p-5 rounded-xl bg-obsidian border border-stagegold/25 text-sm text-offwhite/80 space-y-3">
+                                    <p class="font-semibold text-offwhite">Open Call for Local Acts (3–6 Minutes):</p>
+                                    <p>We welcome soloists, duets, acoustic musicians, holiday poetry readers, and short family-friendly comedy sketches! All ages and experience levels are encouraged to participate.</p>
+                                    <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
+                                        <span class="text-xs text-stagegold">Tech rehearsal: Thursday, Dec 3 at 6:30 PM</span>
+                                        <a href="#contact" onclick="prefillContact('Holiday Variety Show Performer Submission')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-stagegold/20 hover:bg-stagegold text-stagegold hover:text-midnight px-3.5 py-2 rounded-lg transition-colors">
+                                            Submit an Act →
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-white/10">
+                            <button type="button" onclick="openShowModal()" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 bg-stagegold hover:bg-stagegold-light text-midnight font-bold px-6 py-4 rounded-xl shadow-lg transition-all cursor-pointer">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <span>RSVP / Show Details</span>
+                            </button>
+                            <button type="button" onclick="copyText('415 Main Street, Towanda, PA 18848', 'Theatre address copied to clipboard!')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-charcoal hover:bg-white/10 text-offwhite border border-white/15 font-semibold px-6 py-4 rounded-xl transition-colors cursor-pointer">
+                                <svg class="w-5 h-5 text-stagegold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>Copy Venue Address</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2026 SEASON HIGHLIGHTS ARCHIVE / SHOWCASE ROW -->
+            <div>
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-serif text-2xl sm:text-3xl font-bold text-offwhite">2026 Season Highlights</h3>
+                    <span class="text-xs uppercase tracking-widest text-offwhite/50 font-semibold">Recent Productions</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Production 1: Disney's Finding Nemo JR. -->
+                    <article class="spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-sky-500/15 text-sky-300 border border-sky-400/20">
+                                    Youth Musical
+                                </span>
+                                <span class="text-xs font-medium text-offwhite/50">Spring / Summer 2026</span>
+                            </div>
+                            <h4 class="font-serif text-xl sm:text-2xl font-bold text-offwhite mb-2">
+                                Disney’s Finding Nemo JR.
+                            </h4>
+                            <p class="text-xs font-semibold text-stagegold mb-3 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                Performed at the Historic Keystone Theatre
+                            </p>
+                            <p class="text-sm text-offwhite/70 leading-relaxed">
+                                Featuring dozens of talented young performers from across Bradford County bringing Marlin, Dory, and Nemo’s underwater adventure to life on the historic Towanda stage.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-semibold text-emerald-400">● Sold-Out Community Run</span>
+                            <span class="text-xs text-offwhite/50">Youth Theatre Initiative</span>
+                        </div>
+                    </article>
+
+                    <!-- Production 2: Godspell -->
+                    <article class="spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-crimson/30 text-rose-300 border border-rose-400/25">
+                                    Mainstage Musical
+                                </span>
+                                <span class="text-xs font-medium text-offwhite/50">2026 Season</span>
+                            </div>
+                            <h4 class="font-serif text-xl sm:text-2xl font-bold text-offwhite mb-2">
+                                Godspell
+                            </h4>
+                            <p class="text-xs font-semibold text-stagegold mb-3 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                Performed at Sayre High School Auditorium
+                            </p>
+                            <p class="text-sm text-offwhite/70 leading-relaxed">
+                                Stephen Schwartz’s energetic, joy-filled rock musical brought regional casts and audiences together in the Valley for an unforgettable celebration of community and song.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-semibold text-stagegold">● Regional Showcase</span>
+                            <span class="text-xs text-offwhite/50">Full Cast &amp; Live Band</span>
+                        </div>
+                    </article>
+
+                    <!-- Production 3: Summer Cabaret -->
+                    <article class="spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-4">
+                                <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-stagegold/20 text-stagegold-light border border-stagegold/30">
+                                    Intimate Cabaret
+                                </span>
+                                <span class="text-xs font-medium text-offwhite/50">Summer 2026</span>
+                            </div>
+                            <h4 class="font-serif text-xl sm:text-2xl font-bold text-offwhite mb-2">
+                                Summer Cabaret Night
+                            </h4>
+                            <p class="text-xs font-semibold text-stagegold mb-3 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                                Hosted at The Crafted Cup, Towanda
+                            </p>
+                            <p class="text-sm text-offwhite/70 leading-relaxed">
+                                An up-close evening of Broadway favorites, acoustic standards, and local vocal talent paired with artisan coffee and treats in downtown Towanda.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-xs font-semibold text-stagegold">● Community Fundraiser</span>
+                            <span class="text-xs text-offwhite/50">Downtown Collaboration</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         4. OUR STORY (INTERACTIVE TIMELINE / HISTORY)
+         ===================================================================== -->
+    <section id="story" class="py-20 sm:py-28 bg-obsidian border-y border-white/10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <span class="text-stagegold font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] block mb-2">Our Heritage</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-offwhite">
+                    Over Four Decades Along the Susquehanna
+                </h2>
+                <p class="mt-4 text-offwhite/75 text-base sm:text-lg leading-relaxed">
+                    From a single production in a rural community hall in 1980 to our permanent downtown Main Street playhouse, Winding River Players has been built entirely by neighbors who love live theatre.
+                </p>
+            </div>
+
+            <!-- Interactive Era Selector Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12" role="tablist" aria-label="Theatre History Eras">
+                <button type="button" role="tab" aria-selected="true" data-era="all" class="era-tab active px-5 py-2.5 rounded-xl text-sm font-semibold bg-stagegold text-midnight shadow-md transition-all cursor-pointer">
+                    Full Timeline (1980–Present)
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-era="1980" class="era-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-charcoal text-offwhite/80 hover:text-stagegold border border-white/10 transition-all cursor-pointer">
+                    1980: The Founding
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-era="dinner" class="era-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-charcoal text-offwhite/80 hover:text-stagegold border border-white/10 transition-all cursor-pointer">
+                    Dinner-Theater Era
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-era="2001" class="era-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-charcoal text-offwhite/80 hover:text-stagegold border border-white/10 transition-all cursor-pointer">
+                    2001–2021: Main Street Home
+                </button>
+                <button type="button" role="tab" aria-selected="false" data-era="today" class="era-tab px-5 py-2.5 rounded-xl text-sm font-semibold bg-charcoal text-offwhite/80 hover:text-stagegold border border-white/10 transition-all cursor-pointer">
+                    Today &amp; Beyond
+                </button>
+            </div>
+
+            <!-- Timeline Vertical Cards -->
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Center Vertical Spine on Desktop -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-stagegold via-crimson to-stagegold/20 -translate-x-1/2"></div>
+
+                <div class="space-y-8 md:space-y-12">
+                    <!-- Milestone 1: 1980 -->
+                    <div data-era-card="1980" class="era-card relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+                        <div class="md:text-right spotlight-card p-6 sm:p-8 rounded-2xl">
+                            <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-stagegold bg-stagegold/10 px-3 py-1 rounded-full mb-3">
+                                1980 • The Curtain Rises
+                            </span>
+                            <h3 class="font-serif text-2xl font-bold text-offwhite mb-2">
+                                “Our Town” at Ulster Community Hall
+                            </h3>
+                            <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed">
+                                Founders <strong class="text-offwhite">Steve Weiss, Jenny Berg, and Dotti Costello</strong> established Winding River Players with a debut staging of Thornton Wilder’s classic <em>Our Town</em> at Ulster Community Hall—sparking a lasting theatrical tradition in Bradford County.
+                            </p>
+                        </div>
+                        <div class="hidden md:flex items-center justify-start">
+                            <div class="w-12 h-12 rounded-full bg-midnight border-2 border-stagegold flex items-center justify-center font-serif font-bold text-stagegold shadow-lg -ml-[72px] z-10">
+                                ’80
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 2: Dinner-Theater Era -->
+                    <div data-era-card="dinner" class="era-card relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+                        <div class="hidden md:flex items-center justify-end">
+                            <div class="w-12 h-12 rounded-full bg-midnight border-2 border-crimson-light flex items-center justify-center font-serif font-bold text-rose-300 shadow-lg -mr-[72px] z-10">
+                                ’90s
+                            </div>
+                        </div>
+                        <div class="spotlight-card p-6 sm:p-8 rounded-2xl">
+                            <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-rose-300 bg-crimson/30 px-3 py-1 rounded-full mb-3">
+                                The Touring &amp; Dinner-Theater Era
+                            </span>
+                            <h3 class="font-serif text-2xl font-bold text-offwhite mb-2">
+                                Community Venues &amp; Barclay School Benefits
+                            </h3>
+                            <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed">
+                                Led by dedicated local theatre champions <strong class="text-offwhite">Julie Larnard-Newbury, John Thomas, and Joe Newbury</strong>, the troupe staged beloved dinner-theater productions at the Elks Club, Towanda Country Club, and Sons of Italy—including cherished annual benefit shows for the Barclay School.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 3: 2001 & 2021 -->
+                    <div data-era-card="2001" class="era-card relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+                        <div class="md:text-right spotlight-card p-6 sm:p-8 rounded-2xl">
+                            <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-stagegold bg-stagegold/10 px-3 py-1 rounded-full mb-3">
+                                2001 &amp; 2021 • A Permanent Stage
+                            </span>
+                            <h3 class="font-serif text-2xl font-bold text-offwhite mb-2">
+                                415 Main Street &amp; The Joe Newbury Theatre
+                            </h3>
+                            <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed">
+                                In 2001, Winding River Players opened a permanent home in downtown Towanda at <strong class="text-offwhite">415 Main Street—The Black Box Theatre</strong>. In 2021, the stage was officially dedicated and renamed the <strong class="text-stagegold-light">Joe Newbury Theatre</strong> in honor of Joe Newbury’s decades of artistic leadership.
+                            </p>
+                        </div>
+                        <div class="hidden md:flex items-center justify-start">
+                            <div class="w-12 h-12 rounded-full bg-midnight border-2 border-stagegold flex items-center justify-center font-serif font-bold text-stagegold shadow-lg -ml-[72px] z-10">
+                                ’01
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Milestone 4: Today -->
+                    <div data-era-card="today" class="era-card relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+                        <div class="hidden md:flex items-center justify-end">
+                            <div class="w-12 h-12 rounded-full bg-stagegold text-midnight flex items-center justify-center font-serif font-bold shadow-lg -mr-[72px] z-10">
+                                Now
+                            </div>
+                        </div>
+                        <div class="spotlight-card p-6 sm:p-8 rounded-2xl border-stagegold/30">
+                            <span class="inline-block text-xs font-extrabold uppercase tracking-widest text-emerald-300 bg-emerald-500/15 px-3 py-1 rounded-full mb-3">
+                                Today • Regional Arts Hub
+                            </span>
+                            <h3 class="font-serif text-2xl font-bold text-offwhite mb-2">
+                                Serving Bradford &amp; Sullivan Counties
+                            </h3>
+                            <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed">
+                                With a newly refreshed historic storefront on Main Street and partnerships spanning the Keystone Theatre, local schools, and downtown businesses, Winding River Players continues to mentor youth performers and welcome audiences of all ages.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         5. THE VENUE & DIRECTIONS
+         ===================================================================== -->
+    <section id="venue" class="py-20 sm:py-28 bg-midnight relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <!-- Left Column: Venue Story & Features -->
+                <div class="lg:col-span-6">
+                    <span class="text-stagegold font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] block mb-2">Our Home Stage</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-offwhite leading-tight">
+                        The Black Box Theatre
+                    </h2>
+                    <p class="font-serif italic text-lg sm:text-xl text-stagegold-light mt-1">
+                        The Joe Newbury Theatre • 415 Main Street, Towanda, PA
+                    </p>
+
+                    <p class="mt-6 text-offwhite/75 text-base sm:text-lg leading-relaxed">
+                        Nestled in the heart of historic downtown Towanda along the Susquehanna River, our intimate black box space puts audiences just feet away from the action—creating an electric, up-close connection between actors and community.
+                    </p>
+
+                    <!-- Venue Feature Grid -->
+                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-charcoal/70 border border-white/10 rounded-2xl p-5">
+                            <div class="w-10 h-10 rounded-xl bg-stagegold/15 text-stagegold flex items-center justify-center mb-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </div>
+                            <h3 class="font-semibold text-offwhite text-base">Intimate Seating</h3>
+                            <p class="text-xs sm:text-sm text-offwhite/65 mt-1">Flexible black box staging where every seat feels like the front row.</p>
+                        </div>
+
+                        <div class="bg-charcoal/70 border border-white/10 rounded-2xl p-5">
+                            <div class="w-10 h-10 rounded-xl bg-crimson/30 text-rose-300 flex items-center justify-center mb-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            </div>
+                            <h3 class="font-semibold text-offwhite text-base">Refreshed Storefront</h3>
+                            <p class="text-xs sm:text-sm text-offwhite/65 mt-1">Proudly revitalized historic Main Street facade in downtown Towanda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive "Plan Your Visit" Card -->
+                <div class="lg:col-span-6">
+                    <div class="spotlight-card rounded-3xl p-7 sm:p-10 border border-stagegold/25">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-stagegold">Audience Guide</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-offwhite mt-1">Plan Your Visit</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-stagegold/15 border border-stagegold/30 flex items-center justify-center text-stagegold">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                        </div>
+
+                        <!-- Address Box with Quick-Copy -->
+                        <div class="bg-midnight/90 border border-white/10 rounded-2xl p-4 sm:p-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <div class="text-xs uppercase tracking-wider text-offwhite/50 font-semibold">Theatre Address</div>
+                                <div class="text-base sm:text-lg font-semibold text-offwhite mt-0.5">415 Main Street, Towanda, PA 18848</div>
+                            </div>
+                            <button type="button" onclick="copyText('415 Main Street, Towanda, PA 18848', 'Copied 415 Main Street, Towanda, PA 18848!')" class="inline-flex items-center justify-center gap-2 bg-stagegold hover:bg-stagegold-light text-midnight font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shrink-0 transition-colors cursor-pointer">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                <span>Copy Address</span>
+                            </button>
+                        </div>
+
+                        <!-- Visit Tips List -->
+                        <ul class="space-y-4 text-sm sm:text-base text-offwhite/80 mb-8">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-stagegold/20 text-stagegold flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">1</span>
+                                <div>
+                                    <strong class="text-offwhite">Door Times:</strong> House doors typically open <span class="text-stagegold-light font-medium">30 minutes prior</span> to curtain. Because seating is intimate, arriving early ensures the best view.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-stagegold/20 text-stagegold flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">2</span>
+                                <div>
+                                    <strong class="text-offwhite">Downtown Parking:</strong> Free evening and weekend on-street parking is available right along Main Street, with additional municipal lots nearby off Pine and State Streets.
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-stagegold/20 text-stagegold flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">3</span>
+                                <div>
+                                    <strong class="text-offwhite">Intermission &amp; Concessions:</strong> Enjoy light refreshments, baked goods, and seasonal raffle tickets in our lobby—all proceeds support future productions.
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- External Map Link -->
+                        <a href="https://maps.google.com/?q=415+Main+Street,+Towanda,+PA+18848" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 bg-charcoal hover:bg-white/10 border border-white/15 text-offwhite font-semibold py-3.5 px-6 rounded-xl transition-colors">
+                            <span>Open in Google Maps</span>
+                            <svg class="w-4 h-4 text-stagegold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         6. BOARD OF DIRECTORS & GET INVOLVED
+         ===================================================================== -->
+    <section id="board" class="py-20 sm:py-28 bg-obsidian border-t border-white/10 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-stagegold font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] block mb-2">Community Leadership</span>
+                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-offwhite">
+                    Board of Directors &amp; Get Involved
+                </h2>
+                <p class="mt-4 text-offwhite/75 text-base sm:text-lg">
+                    Winding River Players is a 100% volunteer-driven 501(c)(3) nonprofit organization sustained by local artists, educators, and theatre lovers.
+                </p>
+            </div>
+
+            <!-- Board of Directors Roster Card -->
+            <div class="spotlight-card rounded-3xl p-7 sm:p-10 mb-14">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6 mb-8">
+                    <div>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-offwhite">2026 Board of Directors</h3>
+                        <p class="text-sm text-offwhite/65 mt-1">Guiding artistic programming, youth outreach, and historic theatre stewardship</p>
+                    </div>
+                    <span class="inline-flex items-center gap-2 self-start sm:self-auto px-4 py-2 rounded-full bg-stagegold/15 border border-stagegold/30 text-stagegold text-xs font-bold uppercase tracking-wider">
+                        Open Community Seats Available
+                    </span>
+                </div>
+
+                <!-- Board Members Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                    <!-- President Highlight -->
+                    <div class="bg-gradient-to-br from-charcoal to-midnight border border-stagegold/40 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-stagegold text-midnight font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            AA
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Anthony Almond</div>
+                            <div class="text-xs font-bold uppercase tracking-wider text-stagegold mt-0.5">President</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            LG
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Liz Garofalo</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            LR
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Lily Rice</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            CN
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Catherine Napp</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            SC
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Sam Claypool</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            BD
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Brandon Dickerson</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            JF
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Jacob Fowler</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Board Member -->
+                    <div class="bg-charcoal/60 border border-white/10 rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-crimson/40 border border-rose-400/20 text-offwhite font-serif font-bold text-lg flex items-center justify-center shrink-0">
+                            MC
+                        </div>
+                        <div>
+                            <div class="font-bold text-offwhite text-base">Melinda Carey</div>
+                            <div class="text-xs text-offwhite/60 mt-0.5">Board of Directors</div>
+                        </div>
+                    </div>
+
+                    <!-- Open Community Seat Invitation -->
+                    <a href="#contact" onclick="prefillContact('Board of Directors / Community Seat Inquiry')" class="bg-midnight/80 hover:bg-charcoal border border-dashed border-stagegold/40 rounded-2xl p-5 flex items-center gap-4 group transition-colors">
+                        <div class="w-12 h-12 rounded-full bg-stagegold/15 text-stagegold font-bold text-xl flex items-center justify-center shrink-0 group-hover:bg-stagegold group-hover:text-midnight transition-colors">
+                            +
+                        </div>
+                        <div>
+                            <div class="font-bold text-stagegold-light text-base">Open Community Seats</div>
+                            <div class="text-xs text-offwhite/65 mt-0.5">Interested in serving? Reach out →</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3 Interactive "Get Involved" Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Card 1: Auditioning -->
+                <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-stagegold/15 text-stagegold flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-offwhite mb-3">Audition &amp; Perform</h3>
+                        <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed mb-6">
+                            Whether you’re a seasoned local actor or stepping onto the boards for the very first time, our auditions are welcoming, supportive, and open to everyone in the Twin Tiers.
+                        </p>
+                    </div>
+                    <a href="#contact" onclick="prefillContact('Audition & Casting Notifications')" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl bg-charcoal hover:bg-stagegold text-offwhite hover:text-midnight font-semibold text-sm border border-white/10 hover:border-stagegold transition-all">
+                        <span>Join Audition Alert List</span>
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Card 2: Volunteering / Stage Crew -->
+                <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-crimson/30 text-rose-300 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-offwhite mb-3">Backstage &amp; Stage Crew</h3>
+                        <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed mb-6">
+                            Great theatre happens behind the scenes! Lend a hand with set carpentry, lighting &amp; sound operation, costuming, props, ushering, or lobby concessions.
+                        </p>
+                    </div>
+                    <a href="#contact" onclick="prefillContact('Volunteering / Backstage Crew')" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl bg-charcoal hover:bg-stagegold text-offwhite hover:text-midnight font-semibold text-sm border border-white/10 hover:border-stagegold transition-all">
+                        <span>Volunteer With Us</span>
+                        <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Card 3: Sponsorships & 501(c)(3) Donations -->
+                <div class="spotlight-card rounded-2xl p-7 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-300 flex items-center justify-center mb-5">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="font-serif text-2xl font-bold text-offwhite mb-3">Sponsor or Donate</h3>
+                        <p class="text-sm sm:text-base text-offwhite/75 leading-relaxed mb-6">
+                            As a registered <strong class="text-offwhite">501(c)(3) nonprofit</strong>, your tax-deductible gift or playbill business sponsorship keeps ticket prices accessible and funds youth workshops.
+                        </p>
+                    </div>
+                    <a href="#contact" onclick="prefillContact('501(c)(3) Sponsorship / Donation Inquiry')" class="inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl bg-stagegold hover:bg-stagegold-light text-midnight font-bold text-sm shadow-lg transition-all">
+                        <span>Become a Season Patron</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         7. CONTACT SECTION & FOOTER
+         ===================================================================== -->
+    <section id="contact" class="py-20 sm:py-28 bg-midnight border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Contact Info Column -->
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-stagegold font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] block mb-2">Get In Touch</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-offwhite">
+                            Connect With Winding River Players
+                        </h2>
+                        <p class="mt-4 text-offwhite/75 text-base leading-relaxed">
+                            Have questions about upcoming performances, group reservations, youth programs, or supporting our 501(c)(3) theatre? Send us a note—we’d love to hear from you.
+                        </p>
+
+                        <!-- Direct Email Copy Card -->
+                        <div class="mt-8 bg-charcoal/80 border border-white/10 rounded-2xl p-5">
+                            <div class="text-xs uppercase tracking-wider text-offwhite/50 font-semibold mb-1">Official Box Office &amp; Board Email</div>
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <a href="mailto:contact@windingriverplayers.org" class="text-base sm:text-lg font-semibold text-stagegold hover:text-stagegold-light break-all">
+                                    contact@windingriverplayers.org
+                                </a>
+                                <button type="button" onclick="copyText('contact@windingriverplayers.org', 'Email address copied to clipboard!')" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-midnight hover:bg-stagegold text-offwhite hover:text-midnight border border-white/15 px-3.5 py-2 rounded-lg transition-colors cursor-pointer">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Venue Location Summary -->
+                        <div class="mt-4 bg-charcoal/80 border border-white/10 rounded-2xl p-5">
+                            <div class="text-xs uppercase tracking-wider text-offwhite/50 font-semibold mb-1">Theatre Location</div>
+                            <div class="text-base font-semibold text-offwhite">The Black Box Theatre (Joe Newbury Theatre)</div>
+                            <div class="text-sm text-offwhite/70 mt-0.5">415 Main Street, Towanda, PA 18848</div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links Placeholder -->
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <span class="text-xs uppercase tracking-widest text-offwhite/50 font-semibold block mb-3">Follow Our Season</span>
+                        <div class="flex items-center gap-3">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Winding River Players on Facebook" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-charcoal hover:bg-stagegold text-offwhite hover:text-midnight border border-white/10 text-sm font-semibold transition-colors">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Winding River Players on Instagram" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-charcoal hover:bg-stagegold text-offwhite hover:text-midnight border border-white/10 text-sm font-semibold transition-colors">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3Z"/></svg>
+                                <span>Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Static-Friendly Contact Form (Mailto + Optional Formspree Ready) -->
+                <div class="lg:col-span-7">
+                    <form id="contact-form" class="spotlight-card rounded-3xl p-7 sm:p-10 space-y-5">
+                        <h3 class="font-serif text-2xl font-bold text-offwhite">Send a Message</h3>
+                        <p class="text-xs sm:text-sm text-offwhite/65">
+                            Complete the form below to compose an inquiry directly to our volunteer board at <span class="text-stagegold">contact@windingriverplayers.org</span>.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="sender-name" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-2">Your Name *</label>
+                                <input type="text" id="sender-name" name="name" required placeholder="Jane Doe" class="w-full px-4 py-3.5 rounded-xl bg-midnight border border-white/15 text-offwhite placeholder-offwhite/35 focus:outline-none focus:border-stagegold transition-colors">
+                            </div>
+                            <div>
+                                <label for="sender-email" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-2">Email Address *</label>
+                                <input type="email" id="sender-email" name="email" required placeholder="jane@example.com" class="w-full px-4 py-3.5 rounded-xl bg-midnight border border-white/15 text-offwhite placeholder-offwhite/35 focus:outline-none focus:border-stagegold transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="sender-subject" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-2">Topic</label>
+                            <select id="sender-subject" name="subject" class="w-full px-4 py-3.5 rounded-xl bg-midnight border border-white/15 text-offwhite focus:outline-none focus:border-stagegold transition-colors">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Holiday Variety Show RSVP">Holiday Variety Show RSVP (Dec 4, 2026)</option>
+                                <option value="Holiday Variety Show Performer Submission">Holiday Variety Show Performer Submission</option>
+                                <option value="Audition & Casting Notifications">Audition &amp; Casting Notifications</option>
+                                <option value="Volunteering / Backstage Crew">Volunteering / Backstage Crew</option>
+                                <option value="501(c)(3) Sponsorship / Donation Inquiry">501(c)(3) Sponsorship / Donation Inquiry</option>
+                                <option value="Board of Directors / Community Seat Inquiry">Board of Directors / Community Seat Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="sender-message" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-2">Message *</label>
+                            <textarea id="sender-message" name="message" rows="4" required placeholder="Tell us how we can help or how you'd like to get involved..." class="w-full px-4 py-3.5 rounded-xl bg-midnight border border-white/15 text-offwhite placeholder-offwhite/35 focus:outline-none focus:border-stagegold transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                            <button type="submit" class="inline-flex items-center justify-center gap-2 bg-stagegold hover:bg-stagegold-light text-midnight font-bold px-8 py-4 rounded-xl shadow-lg transition-all cursor-pointer">
+                                <span>Send Message</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                            </button>
+                            <span class="text-xs text-offwhite/50">Opens your email client pre-addressed to our team.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================================
+         FOOTER
+         ===================================================================== -->
+    <footer class="bg-obsidian border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                <div class="font-serif text-xl font-bold text-offwhite">Winding River Players</div>
+                <p class="text-xs sm:text-sm text-offwhite/60 mt-1">
+                    Black Box Theatre • 415 Main Street, Towanda, PA 18848 • Registered 501(c)(3) Nonprofit
+                </p>
+            </div>
+            <div class="text-xs sm:text-sm text-offwhite/55">
+                &copy; 2026 Winding River Players. All rights reserved. Established 1980.
+            </div>
+        </div>
+    </footer>
+
+    <!-- =====================================================================
+         INTERACTIVE MODAL: HOLIDAY VARIETY SHOW RSVP & DETAILS
+         ===================================================================== -->
+    <div id="show-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="relative w-full max-w-lg bg-charcoal border border-stagegold/40 rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <button type="button" onclick="closeShowModal()" aria-label="Close modal" class="absolute top-5 right-5 p-2 rounded-xl bg-midnight/70 text-offwhite/70 hover:text-stagegold transition-colors cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <span class="inline-block text-xs font-bold uppercase tracking-widest text-stagegold bg-stagegold/15 px-3 py-1 rounded-full mb-3">
+                Free Admission • Limited Seating
+            </span>
+            <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-offwhite">
+                Holiday Variety Show RSVP
+            </h3>
+            <p class="text-sm text-offwhite/75 mt-2">
+                <strong class="text-offwhite">Friday, December 4, 2026 at 7:00 PM</strong> (Doors open at 6:30 PM) at the Black Box Theatre, 415 Main Street, Towanda, PA.
+            </p>
+
+            <form id="rsvp-form" class="mt-6 space-y-4">
+                <div>
+                    <label for="rsvp-name" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-1.5">Full Name *</label>
+                    <input type="text" id="rsvp-name" required placeholder="Your name" class="w-full px-4 py-3 rounded-xl bg-midnight border border-white/15 text-offwhite focus:outline-none focus:border-stagegold">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="rsvp-guests" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-1.5">Party Size</label>
+                        <select id="rsvp-guests" class="w-full px-4 py-3 rounded-xl bg-midnight border border-white/15 text-offwhite focus:outline-none focus:border-stagegold">
+                            <option value="1 Guest">1 Guest</option>
+                            <option value="2 Guests" selected>2 Guests</option>
+                            <option value="3 Guests">3 Guests</option>
+                            <option value="4 Guests">4 Guests</option>
+                            <option value="5+ Family Group">5+ Family Group</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="rsvp-email" class="block text-xs font-semibold uppercase tracking-wider text-offwhite/80 mb-1.5">Email *</label>
+                        <input type="email" id="rsvp-email" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl bg-midnight border border-white/15 text-offwhite focus:outline-none focus:border-stagegold">
+                    </div>
+                </div>
+
+                <div class="bg-midnight/70 border border-white/10 rounded-xl p-3.5 text-xs text-offwhite/70">
+                    Admission is free! Seating is first-come, first-seated when doors open at 6:30 PM right after Towanda’s Hometown Christmas tree lighting.
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button type="submit" class="flex-1 bg-stagegold hover:bg-stagegold-light text-midnight font-bold py-3.5 px-5 rounded-xl transition-colors cursor-pointer">
+                        Send Seat RSVP
+                    </button>
+                    <button type="button" onclick="closeShowModal()" class="py-3.5 px-5 rounded-xl bg-midnight hover:bg-white/10 text-offwhite font-semibold text-sm border border-white/10 transition-colors cursor-pointer">
+                        Close
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         VANILLA JAVASCRIPT FOR INTERACTIVITY
+         ===================================================================== -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            iconOpen.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', String(isHidden));
+        });
+
+        // Close mobile menu when clicking a nav link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // 2. Audition / Perform Info Drawer Toggle
+        const performToggleBtn = document.getElementById('perform-toggle-btn');
+        const performDrawer = document.getElementById('perform-drawer');
+        const performChevron = document.getElementById('perform-chevron');
+
+        performToggleBtn.addEventListener('click', () => {
+            const isExpanded = performToggleBtn.getAttribute('aria-expanded') === 'true';
+            performToggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+            performDrawer.classList.toggle('hidden');
+            performChevron.classList.toggle('rotate-180');
+        });
+
+        // 3. Interactive History Era Filter Tabs
+        const eraTabs = document.querySelectorAll('.era-tab');
+        const eraCards = document.querySelectorAll('.era-card');
+
+        eraTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const selectedEra = tab.getAttribute('data-era');
+
+                // Update active tab styles
+                eraTabs.forEach(t => {
+                    t.classList.remove('bg-stagegold', 'text-midnight', 'shadow-md');
+                    t.classList.add('bg-charcoal', 'text-offwhite/80', 'border', 'border-white/10');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.remove('bg-charcoal', 'text-offwhite/80', 'border', 'border-white/10');
+                tab.classList.add('bg-stagegold', 'text-midnight', 'shadow-md');
+                tab.setAttribute('aria-selected', 'true');
+
+                // Filter timeline cards smoothly
+                eraCards.forEach(card => {
+                    if (selectedEra === 'all' || card.getAttribute('data-era-card') === selectedEra) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // 4. Toast Notification Helper
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3400);
+        }
+
+        // 5. Cross-Browser Copy-to-Clipboard Function (with execCommand fallback)
+        function copyText(text, successMessage) {
+            try {
+                const tempInput = document.createElement('textarea');
+                tempInput.value = text;
+                tempInput.setAttribute('readonly', '');
+                tempInput.style.position = 'absolute';
+                tempInput.style.left = '-9999px';
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast(successMessage || 'Copied to clipboard!');
+            } catch (err) {
+                showToast('Unable to copy automatically: ' + text);
+            }
+        }
+
+        // 6. Show RSVP Modal Controls
+        const showModal = document.getElementById('show-modal');
+
+        function openShowModal() {
+            showModal.classList.remove('hidden');
+            showModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeShowModal() {
+            showModal.classList.add('hidden');
+            showModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking backdrop or pressing Escape
+        showModal.addEventListener('click', (e) => {
+            if (e.target === showModal) closeShowModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !showModal.classList.contains('hidden')) {
+                closeShowModal();
+            }
+        });
+
+        // Handle Modal RSVP Submission via Mailto
+        document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('rsvp-name').value.trim();
+            const guests = document.getElementById('rsvp-guests').value;
+            const email = document.getElementById('rsvp-email').value.trim();
+
+            const subject = encodeURIComponent(`Holiday Variety Show RSVP - ${name} (${guests})`);
+            const body = encodeURIComponent(
+                `Hello Winding River Players,\n\nI would like to RSVP for the Holiday Variety Show on Friday, December 4, 2026 at 7:00 PM:\n\nName: ${name}\nParty Size: ${guests}\nContact Email: ${email}\n\nThank you!`
+            );
+
+            closeShowModal();
+            showToast('Opening your email app to send RSVP...');
+            window.location.href = `mailto:contact@windingriverplayers.org?subject=${subject}&body=${body}`;
+        });
+
+        // 7. Prefill Contact Form Subject from Quick-Action Buttons
+        function prefillContact(topic) {
+            const subjectSelect = document.getElementById('sender-subject');
+            for (let i = 0; i < subjectSelect.options.length; i++) {
+                if (subjectSelect.options[i].value === topic) {
+                    subjectSelect.selectedIndex = i;
+                    break;
+                }
+            }
+            showToast(`Topic selected: ${topic}`);
+        }
+
+        // 8. Static-Safe Contact Form Submission (Mailto Fallback)
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('sender-name').value.trim();
+            const email = document.getElementById('sender-email').value.trim();
+            const subject = document.getElementById('sender-subject').value;
+            const message = document.getElementById('sender-message').value.trim();
+
+            const mailSubject = encodeURIComponent(`[WRP Website] ${subject} — from ${name}`);
+            const mailBody = encodeURIComponent(
+                `Name: ${name}\nReply Email: ${email}\nTopic: ${subject}\n\nMessage:\n${message}`
+            );
+
+            showToast('Opening your email client to send message...');
+            window.location.href = `mailto:contact@windingriverplayers.org?subject=${mailSubject}&body=${mailBody}`;
+        });
+    </script>
+</body>
+</html>
