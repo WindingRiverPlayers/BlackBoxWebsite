@@ -325,7 +325,7 @@
     .section-header {
       text-align: center;
       max-width: 720px;
-      margin: 0 auto 2.75rem;
+      margin: 0 auto 2.25rem;
     }
 
     .section-tag {
@@ -558,23 +558,23 @@
       gap: 1.5rem;
     }
 
-    /* Photo Galleries Section */
+    /* Photo Galleries Section (Compact & Collapsible) */
     .gallery-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.65rem;
+      gap: 0.75rem;
       justify-content: center;
-      margin-bottom: 2.25rem;
+      margin-bottom: 0.5rem;
     }
 
     .gallery-tab-btn {
       background: var(--bg-card);
       color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      padding: 0.55rem 1.1rem;
+      border: 1px solid var(--border);
+      padding: 0.65rem 1.25rem;
       border-radius: 999px;
       font-family: inherit;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -583,6 +583,7 @@
     .gallery-tab-btn:hover {
       border-color: var(--gold);
       color: var(--gold);
+      transform: translateY(-1px);
     }
 
     .gallery-tab-btn.active {
@@ -592,22 +593,22 @@
     }
 
     .gallery-show-block {
-      margin-bottom: 3rem;
-    }
-
-    .gallery-show-block:last-child {
-      margin-bottom: 0;
+      margin-top: 2rem;
+      background: rgba(24, 27, 36, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
     }
 
     .gallery-show-header {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 1.1rem;
-      padding-bottom: 0.6rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid rgba(212, 175, 55, 0.2);
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
     .gallery-show-header h3 {
@@ -616,13 +617,16 @@
     }
 
     .gallery-photo-count {
-      font-size: 0.84rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
+      margin-left: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 1.1rem;
     }
 
@@ -1107,18 +1111,18 @@
     </div>
   </section>
 
-  <!-- Production Photo Galleries Section -->
+  <!-- Production Photo Galleries Section (Collapsed by Default) -->
   <section id="galleries">
     <div class="section-header">
       <span class="section-tag">Memories From Our Stage</span>
       <h2>Production Photo Galleries</h2>
-      <p>Browse photos from past Winding River Players productions. Click any show tab to filter, or click a photo to view it full-screen.</p>
+      <p>Select a production below to view its photo gallery (click the show name again to hide the photos).</p>
     </div>
 
-    <div id="gallery-tabs-container" class="gallery-tabs"></div>
-    <div id="galleries-container">
-      <div class="loading-state">Loading photo galleries...</div>
+    <div id="gallery-tabs-container" class="gallery-tabs">
+      <div class="loading-state">Loading show galleries...</div>
     </div>
+    <div id="galleries-container"></div>
   </section>
 
   <!-- Auditions, Performing, Backstage & Stage Crew -->
@@ -1360,12 +1364,13 @@
 
   <script>
     // =========================================================================
-    // REQUIRED FOR GITHUB PAGES: Paste your Google Apps Script /exec URL below
+    // REQUIRED FOR GITHUB PAGES: Your Google Apps Script /exec URL
     // =========================================================================
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRe1N0pEMCx9Wx_MqAp9i7n0ugwIr0yGbTrqT0CTytPReqQ-tIAyNw7amp6oS0a2Pj/exec';
 
     // Store galleries and flat photo list for filtering and lightbox navigation
     let allGalleries = [];
+    let activeGalleryShow = null; // null = collapsed/hidden by default
     let currentLightboxList = [];
     let currentLightboxIndex = 0;
 
@@ -1407,37 +1412,47 @@
       return 'https://www.google.com/maps/search/?api=1&query=' + query;
     }
 
-    // Render Photo Galleries with Show Filter Tabs
+    // Render Photo Galleries (Collapsed by default; only shows thumbnails when a show button is clicked)
     function renderPhotoGalleries(galleries, selectedShow) {
       const tabsEl = document.getElementById('gallery-tabs-container');
       const containerEl = document.getElementById('galleries-container');
 
       if (!galleries || galleries.length === 0) {
         tabsEl.innerHTML = '';
-        containerEl.innerHTML = '<div class="loading-state">Production photos coming soon! Add rows to the "Photos" tab in your Google Sheet to display galleries here.</div>';
+        containerEl.innerHTML = '<div class="loading-state">Production photos coming soon!</div>';
         return;
       }
 
-      const activeFilter = selectedShow || 'ALL';
+      activeGalleryShow = selectedShow || null;
 
-      // Build Filter Pill Buttons
-      let tabsHtml = '<button class="gallery-tab-btn ' + (activeFilter === 'ALL' ? 'active' : '') + '" onclick="filterGallery(\'ALL\')">All Shows</button>';
+      // Build Show Filter Buttons
+      let tabsHtml = '';
       for (let i = 0; i < galleries.length; i++) {
         const sName = galleries[i].showName;
-        const isActive = (activeFilter === sName) ? 'active' : '';
+        const isActive = (activeGalleryShow === sName) ? 'active' : '';
         tabsHtml += '<button class="gallery-tab-btn ' + isActive + '" data-show="' + escapeHtml(sName) + '" onclick="filterGallery(this.getAttribute(\'data-show\'))">' +
-          escapeHtml(sName) + ' (' + galleries[i].photos.length + ')' +
+          '&#128247; ' + escapeHtml(sName) + ' (' + galleries[i].photos.length + ')' +
         '</button>';
+      }
+      if (activeGalleryShow) {
+        tabsHtml += '<button class="gallery-tab-btn" style="border-color: rgba(255,255,255,0.28); color: var(--text-muted);" onclick="filterGallery(null)">&times; Hide Photos</button>';
       }
       tabsEl.innerHTML = tabsHtml;
 
-      // Build Filtered Photo List and HTML Blocks
+      // Keep photos hidden unless a show tab is actively selected
+      if (!activeGalleryShow) {
+        currentLightboxList = [];
+        containerEl.innerHTML = '';
+        return;
+      }
+
+      // Build Photo Grid for the Selected Show Only
       currentLightboxList = [];
       let blocksHtml = '';
 
       for (let g = 0; g < galleries.length; g++) {
         const group = galleries[g];
-        if (activeFilter !== 'ALL' && group.showName !== activeFilter) continue;
+        if (group.showName !== activeGalleryShow) continue;
 
         let photosGridHtml = '';
         for (let p = 0; p < group.photos.length; p++) {
@@ -1463,8 +1478,8 @@
         blocksHtml +=
           '<div class="gallery-show-block">' +
             '<div class="gallery-show-header">' +
-              '<h3>' + escapeHtml(group.showName) + '</h3>' +
-              '<span class="gallery-photo-count">' + group.photos.length + (group.photos.length === 1 ? ' Photo' : ' Photos') + '</span>' +
+              '<h3>' + escapeHtml(group.showName) + ' <span class="gallery-photo-count">(' + group.photos.length + (group.photos.length === 1 ? ' Photo' : ' Photos') + ')</span></h3>' +
+              '<button class="btn btn-outline" style="padding: 0.35rem 0.85rem; font-size: 0.8rem;" onclick="filterGallery(null)">Hide Gallery &uarr;</button>' +
             '</div>' +
             '<div class="gallery-grid">' +
               photosGridHtml +
@@ -1475,8 +1490,13 @@
       containerEl.innerHTML = blocksHtml;
     }
 
+    // Toggle gallery: clicking the active show closes it; clicking a different show opens it
     function filterGallery(showName) {
-      renderPhotoGalleries(allGalleries, showName);
+      if (showName && activeGalleryShow === showName) {
+        renderPhotoGalleries(allGalleries, null);
+      } else {
+        renderPhotoGalleries(allGalleries, showName);
+      }
     }
 
     function openLightbox(index) {
@@ -1652,9 +1672,9 @@
         }
       }
 
-      // 5. Render Grouped Photo Galleries
+      // 5. Render Grouped Photo Galleries (Hidden/Collapsed by default)
       allGalleries = data.photoGalleries || [];
-      renderPhotoGalleries(allGalleries, 'ALL');
+      renderPhotoGalleries(allGalleries, null);
     }
 
     function prefillInquiry(categoryName) {
