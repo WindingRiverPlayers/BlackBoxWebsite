@@ -1338,8 +1338,19 @@
     <button class="lightbox-nav-btn lightbox-next" onclick="stepLightbox(1)" aria-label="Next photo">&#10095;</button>
   </div>
 
-  <!-- Footer -->
+<!-- Footer -->
   <footer>
+    <div style="max-width: 520px; margin: 0 auto 2rem; padding: 1.25rem 1.5rem; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); border-radius: 12px;">
+      <p style="color: #e5e7eb; font-size: 0.95rem; font-weight: 500; margin-bottom: 0.85rem;">
+        We are proud to be a member agency of The United Way of Bradford County.
+      </p>
+      <div style="display: inline-block; background: #ffffff; padding: 0.65rem 1.15rem; border-radius: 8px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);">
+        <img src="UWBC%20Logo%20without%20address.png"
+             alt="United Way of Bradford County Logo"
+             style="max-height: 58px; width: auto; display: block;">
+      </div>
+    </div>
+
     <p style="color: #fff; font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem;">
       Winding River Players • Home Venue: The Black Box Theatre, 415 Main Street, Towanda, PA 18848
     </p>
@@ -1358,7 +1369,7 @@
       <a href="mailto:contact@windingriverplayers.org">contact@windingriverplayers.org</a>
     </p>
   </footer>
-
+  
   <!-- Optional inline data if served directly via Apps Script -->
   <script id="wrp-initial-data" type="application/json"><?!= typeof initialDataJson !== 'undefined' ? initialDataJson : '' ?></script>
 
